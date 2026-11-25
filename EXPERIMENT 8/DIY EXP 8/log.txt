@@ -1,1 +1,2 @@
 [File] Switched at run time.
+[File] Hello, polymorphism!

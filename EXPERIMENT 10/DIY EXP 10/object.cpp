@@ -11,28 +11,33 @@ public:
 
 int main() {
     Student s[100];
-    int n = 0;
+    int n;
 
-    ifstream fin("students.txt");
+    cout << "Enter number of students: ";
+    cin >> n;
 
-    if (!fin) {
-        cout << "File not found!";
-        return 1;
+    // Writing records into file
+    ofstream fout("students.txt");
+
+    for (int i = 0; i < n; i++) {
+        cout << "Enter name and marks: ";
+        cin >> s[i].name >> s[i].marks;
+
+        fout << s[i].name << " " << s[i].marks << endl;
     }
 
-    // Read records into array of objects
-    while (n < 100 && fin >> s[n].name >> s[n].marks) {
-        n++;
+    fout.close();
+
+    // Reading records from file
+    ifstream fin("students.txt");
+
+    for (int i = 0; i < n; i++) {
+        fin >> s[i].name >> s[i].marks;
     }
 
     fin.close();
 
-    if (n == 0) {
-        cout << "No student records found.";
-        return 0;
-    }
-
-    // Find topper
+    // Finding topper
     int topper = 0;
 
     for (int i = 1; i < n; i++) {
@@ -41,18 +46,8 @@ int main() {
         }
     }
 
-    // Display all student records
-    cout << "Student Records:" << endl;
-
-    for (int i = 0; i < n; i++) {
-        cout << "Name: " << s[i].name
-             << ", Marks: " << s[i].marks << endl;
-    }
-
-    // Display topper
-    cout << "\nTopper Details:" << endl;
-    cout << "Name: " << s[topper].name << endl;
-    cout << "Marks: " << s[topper].marks << endl;
+    cout << "\nTopper: " << s[topper].name;
+    cout << "\nMarks: " << s[topper].marks;
 
     return 0;
 }
